@@ -30,9 +30,9 @@ module Fitbank
       end
 
       def generate_pix_out(params = {})
+        # Campos obrigatórios mínimos para PIX usando chave PIX
         validate_required_params(params,
                                  %i[
-                                   mkt_place_id
                                    partner_id
                                    business_unit_id
                                    tax_number
@@ -40,19 +40,12 @@ module Fitbank
                                    bank_branch
                                    bank_account
                                    bank_account_digit
+                                   to_tax_number
+                                   to_name
+                                   pix_key
                                    value
                                    identifier
                                    payment_date
-                                   pix_key
-                                   pix_key_type
-                                   to_name
-                                   to_tax_number
-                                   to_bank
-                                   to_ispb
-                                   to_bank_branch
-                                   to_bank_account
-                                   to_bank_account_digit
-                                   account_type
                                  ])
 
         request(
@@ -95,16 +88,16 @@ module Fitbank
 
       def get_pix_out_by_id(params = {})
         validate_required_params(params, %i[
-          partner_id
-          business_unit_id
-          document_number
-          tax_number
-          bank
-          bank_branch
-          bank_account
-          bank_account_digit
-          identifier
-        ])
+                                   partner_id
+                                   business_unit_id
+                                   document_number
+                                   tax_number
+                                   bank
+                                   bank_branch
+                                   bank_account
+                                   bank_account_digit
+                                   identifier
+                                 ])
 
         request(
           method: :post,
